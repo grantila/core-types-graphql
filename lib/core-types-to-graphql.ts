@@ -157,7 +157,7 @@ export function convertCoreTypesToGraphqlAst(
 						[ gqlNamedTypeNode( nullTypeName ) ],
 						ctx
 					);
-					return handleUnsupported( ctx, node, [ index ] );
+				return handleUnsupported( ctx, node, [ index ] );
 			}
 			if ( node.type === 'or' )
 			{
