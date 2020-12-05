@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`graphql-to-core-types Object type 1`] = `
+"# This file was auto-generated using
+# core-types-graphql (https://github.com/grantila/core-types-graphql)
+
+\\"\\"\\"
+This is a foo
+
+# example
+    \`{ req: 'the foo', opt: 4 }\`
+\\"\\"\\"
+type Foo {
+  \\"required...\\"
+  req: String!
+  \\"\\"\\"
+  # example
+      \`5\`
+  # example
+      \`8\`
+  \\"\\"\\"
+  opt: Int
+  \\"optional array...\\"
+  optarr: [String!]
+  decimal: Float
+  someref: UserBlob!
+}
+"
+`;
+
+exports[`graphql-to-core-types header comment Everything 1`] = `
+"# The file out.gql was auto-generated from infile.ts using
+# core-types-graphql (https://github.com/grantila/core-types-graphql)
+# on behalf of
+# foo (foo.com)
+
+union Foo = String
+"
+`;
+
+exports[`graphql-to-core-types header comment Filename 1`] = `
+"# The file out.gql was auto-generated using
+# core-types-graphql (https://github.com/grantila/core-types-graphql)
+
+union Foo = String
+"
+`;
+
+exports[`graphql-to-core-types header comment Source filename 1`] = `
+"# This file was auto-generated from infile.ts using
+# core-types-graphql (https://github.com/grantila/core-types-graphql)
+
+union Foo = String
+"
+`;
+
+exports[`graphql-to-core-types header comment User package 1`] = `
+"# This file was auto-generated using
+# core-types-graphql (https://github.com/grantila/core-types-graphql)
+# on behalf of
+# foo
+
+union Foo = String
+"
+`;
+
+exports[`graphql-to-core-types header comment User package url 1`] = `
+"# This file was auto-generated using
+# core-types-graphql (https://github.com/grantila/core-types-graphql)
+# on behalf of
+# foo.com
+
+union Foo = String
+"
+`;
+
+exports[`graphql-to-core-types used in readme 1`] = `
+"# This file was auto-generated using
+# core-types-graphql (https://github.com/grantila/core-types-graphql)
+
+\\"\\"\\"
+# User type
+
+This type holds the user information, such as name
+\\"\\"\\"
+type User {
+  \\"The real name\\"
+  name: String!
+}
+
+\\"A chat line\\"
+type ChatLine {
+  user: User!
+  line: String!
+}
+"
+`;

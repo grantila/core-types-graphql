@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`graphql-to-core-types unions and objects 1`] = `
+Array [
+  Object {
+    "loc": Object {
+      "end": 48,
+      "start": 3,
+    },
+    "name": "Stringish",
+    "title": "Kind of a string",
+    "type": "string",
+  },
+  Object {
+    "loc": Object {
+      "end": 97,
+      "start": 52,
+    },
+    "name": "Bar",
+    "or": Array [
+      Object {
+        "ref": "Stringish",
+        "type": "ref",
+      },
+      Object {
+        "ref": "Foo",
+        "type": "ref",
+      },
+    ],
+    "title": "string or foo",
+    "type": "or",
+  },
+  Object {
+    "additionalProperties": false,
+    "description": "fyi",
+    "loc": Object {
+      "end": 350,
+      "start": 101,
+    },
+    "name": "Foo",
+    "properties": Object {
+      "age": Object {
+        "node": Object {
+          "default": "42",
+          "examples": Array [
+            "4",
+            "{
+	foo: 'bar'
+}",
+          ],
+          "loc": Object {
+            "end": 312,
+            "start": 193,
+          },
+          "title": "optional prop",
+          "type": "integer",
+        },
+        "required": false,
+      },
+      "bar": Object {
+        "node": Object {
+          "loc": Object {
+            "end": 346,
+            "start": 316,
+          },
+          "ref": "Bar",
+          "title": "The whiskey bar",
+          "type": "ref",
+        },
+        "required": true,
+      },
+      "name": Object {
+        "node": Object {
+          "elementType": Object {
+            "ref": "Stringish",
+            "type": "ref",
+          },
+          "loc": Object {
+            "end": 188,
+            "start": 150,
+          },
+          "title": "required prop",
+          "type": "array",
+        },
+        "required": true,
+      },
+    },
+    "title": "This is a foo",
+    "type": "object",
+  },
+]
+`;
