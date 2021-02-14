@@ -36,7 +36,7 @@ describe( "graphql-to-core-types", ( ) =>
 			"The whiskey bar"
 			bar: Bar!
 		}`;
-		const ct = convertGraphqlToCoreTypes( schema ).types;
+		const ct = convertGraphqlToCoreTypes( schema ).data.types;
 		expect( ct ).toMatchSnapshot( );
 	} );
 } );

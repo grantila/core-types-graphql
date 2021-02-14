@@ -27,6 +27,9 @@ Other conversion packages:
 
 # Usage
 
+There are two conversion functions, `convertCoreTypesToGraphql` and `convertGraphqlToCoreTypes`, both returning a wrapped value, of the type [`ConversionResult`](https://github.com/grantila/core-types#conversion).
+
+
 ## core-types to GraphQL
 
 Conversion can be done to GraphQL *code* using `convertCoreTypesToGraphql`, but also to GraphQL *AST* using `convertCoreTypesToGraphqlAst`. The arguments to these are the same.
@@ -36,7 +39,7 @@ import { convertCoreTypesToGraphql } from 'core-types-graphql'
 
 let doc; // This core-types document comes from somewhere
 
-const graphQL = convertCoreTypesToGraphql( doc );
+const { data: graphQL } = convertCoreTypesToGraphql( doc );
 ```
 
 You can provide options as a second argument fn the type:
@@ -85,7 +88,7 @@ where `NameGeneratorTestFunction` is a test function to check if the generated n
 ( name: string ) => boolean;
 ```
 
-If this is specified (instead of letting a default name generator be used), an implementation is supposed to generate a name, potentially based on the `baseName` and a `nameHint` (e.g. an interface name and a property name within that interface), and test this generated name against `test`, altering it if necessary until `test` returns `true`, and then return that strin.
+If this is specified (instead of letting a default name generator be used), an implementation is supposed to generate a name, potentially based on the `baseName` and a `nameHint` (e.g. an interface name and a property name within that interface), and test this generated name against `test`, altering it if necessary until `test` returns `true`, and then return that string.
 
 
 ## GraphQL to core-types
@@ -95,7 +98,7 @@ import { convertGraphqlToCoreTypes } from 'core-types-graphql'
 
 let graphQL; // This GraphQL string comes from somewhere
 
-const doc = convertGraphqlToCoreTypes( graphQL );
+const { data: doc } = convertGraphqlToCoreTypes( graphQL );
 ```
 
 An optional second argument can be provided on the form

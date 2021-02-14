@@ -36,8 +36,10 @@ describe( "two-way", ( ) =>
 				age: Int
 			}
 		`;
-		const ct = convertGraphqlToCoreTypes( schema );
-		const gql = convertCoreTypesToGraphql( ct, { includeComment: false } );
+		const { data: ct } = convertGraphqlToCoreTypes( schema );
+		const { data: gql } =
+			convertCoreTypesToGraphql( ct, { includeComment: false } );
+
 		expect( untab( )( gql.trim( ) ) )
 			.toEqual( untab( )( schema.trim( ) ) );
 	} );

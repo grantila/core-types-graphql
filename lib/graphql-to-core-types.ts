@@ -12,6 +12,7 @@ import {
 	RefType,
 	StringType,
 	UnsupportedError,
+	ConversionResult,
 } from 'core-types'
 import {
 	DocumentNode,
@@ -37,7 +38,7 @@ export function convertGraphqlToCoreTypes(
 	source: string,
 	options?: GraphqlToCoreTypesOptions,
 )
-: NodeDocument
+: ConversionResult< NodeDocument >
 {
 	const {
 		warn = ( message: string ) => console.warn( message ),
@@ -56,13 +57,18 @@ export function convertGraphqlToCoreTypes(
 			}
 		);
 
+	const notConvertedTypes: Array< string > = [ ];
+
 	const types = document.definitions
 	.map( ( definition ): NamedType< NodeType > | undefined =>
 	{
 		if ( definition.kind === 'UnionTypeDefinition' )
 		{
 			if ( !definition.types?.length )
+			{
+				notConvertedTypes.push( definition.name.value );
 				return;
+			}
 
 			else if ( definition.types.length === 1 )
 			{
@@ -94,7 +100,12 @@ export function convertGraphqlToCoreTypes(
 		else
 		{
 			if ( unsupported === 'ignore' )
+			{
+				const name = ( definition as any )?.name?.value;
+				if ( name )
+					notConvertedTypes.push( name );
 				return;
+			}
 
 			const message = `GraphQL kind ${definition.kind} not supported`;
 			const meta: CoreTypesErrorMeta = {
@@ -111,7 +122,11 @@ export function convertGraphqlToCoreTypes(
 	} )
 	.filter( < T >( t: T ): t is NonNullable< T > => !!t );
 
-	return { version: 1, types };
+	return {
+		data: { version: 1, types },
+		convertedTypes: types.map( ( { name } ) => name ),
+		notConvertedTypes,
+	};
 }
 
 function parseCommonFields(

@@ -12,6 +12,7 @@ import {
 	isNonNullable,
 	NodeDocument,
 	UnsupportedError,
+	ConversionResult,
 } from 'core-types'
 import {
 	DefinitionNode,
@@ -94,7 +95,7 @@ export function convertCoreTypesToGraphqlAst(
 	doc: NodeDocument,
 	options: CoreTypesToGraphqlOptions = { }
 )
-: DocumentNode
+: ConversionResult< DocumentNode >
 {
 	if ( doc.version !== 1 )
 		throw new UnsupportedError(
@@ -128,51 +129,65 @@ export function convertCoreTypesToGraphqlAst(
 			),
 	};
 
+	const convertedTypes: Array< string > = [ ];
+	const notConvertedTypes: Array< string > = [ ];
+
 	const definitions = types
 		.map( ( node, index ): DefinitionNode | undefined =>
 		{
-			if (
-				node.type === 'boolean'
-				||
-				node.type === 'number'
-				||
-				node.type === 'integer'
-				||
-				node.type === 'string'
-			)
-				return makeUnionType(
-					{
-						name: node.name,
-						...extractAnnotations( node ),
-						type: 'or',
-						or: [ node ],
-					},
-					ctx
-				);
-			if ( node.type === 'null' )
+			const convert = ( ): DefinitionNode | undefined =>
 			{
-				if ( nullTypeName )
-					return gqlUnionTypeOfTypes(
-						node,
-						[ gqlNamedTypeNode( nullTypeName ) ],
+				if (
+					node.type === 'boolean'
+					||
+					node.type === 'number'
+					||
+					node.type === 'integer'
+					||
+					node.type === 'string'
+				)
+					return makeUnionType(
+						{
+							name: node.name,
+							...extractAnnotations( node ),
+							type: 'or',
+							or: [ node ],
+						},
 						ctx
 					);
-				return handleUnsupported( ctx, node, [ index ] );
+				if ( node.type === 'null' )
+				{
+					if ( nullTypeName )
+						return gqlUnionTypeOfTypes(
+							node,
+							[ gqlNamedTypeNode( nullTypeName ) ],
+							ctx
+						);
+					return handleUnsupported( ctx, node, [ index ] );
+				}
+				if ( node.type === 'or' )
+				{
+					return makeUnionType( node, ctx );
+				}
+				else if ( node.type === 'object' )
+					return makeObjectType( node, ctx );
+				else
+					return handleUnsupported( ctx, node, [ index ] );
 			}
-			if ( node.type === 'or' )
-			{
-				return makeUnionType( node, ctx );
-			}
-			else if ( node.type === 'object' )
-				return makeObjectType( node, ctx );
-			else
-				return handleUnsupported( ctx, node, [ index ] );
+
+			const gqlNode = convert( );
+			( gqlNode ? convertedTypes : notConvertedTypes ).push( node.name );
+			return gqlNode;
 		} )
 		.filter( isNonNullable );
 
 	return {
-		definitions,
-		kind: 'Document',
+		data: {
+			definitions,
+			kind: 'Document',
+		},
+		convertedTypes,
+		notConvertedTypes,
 	};
 }
 
@@ -199,9 +214,13 @@ export function convertCoreTypesToGraphql(
 	doc: NodeDocument,
 	options: CoreTypesToGraphqlOptions = { }
 )
-: string
+: ConversionResult
 {
-	const ast = convertCoreTypesToGraphqlAst( doc, options );
+	const {
+		data: ast,
+		convertedTypes,
+		notConvertedTypes,
+	} = convertCoreTypesToGraphqlAst( doc, options );
 
 	const header =
 		( options.includeComment ?? true )
@@ -213,7 +232,11 @@ export function convertCoreTypesToGraphql(
 		)
 		: undefined;
 
-	return ( header ? `${header}\n\n` : '' ) + print( ast );
+	return {
+		data: ( header ? `${header}\n\n` : '' ) + print( ast ),
+		convertedTypes,
+		notConvertedTypes,
+	};
 }
 
 function gqlUnionTypeOfTypes(

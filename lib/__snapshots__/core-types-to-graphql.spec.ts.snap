@@ -1,7 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`graphql-to-core-types Object type 1`] = `
-"# This file was auto-generated using
+Object {
+  "convertedTypes": Array [
+    "Foo",
+  ],
+  "data": "# This file was auto-generated using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 
 \\"\\"\\"
@@ -25,57 +29,94 @@ type Foo {
   decimal: Float
   someref: UserBlob!
 }
-"
+",
+  "notConvertedTypes": Array [],
+}
 `;
 
 exports[`graphql-to-core-types header comment Everything 1`] = `
-"# The file out.gql was auto-generated from infile.ts using
+Object {
+  "convertedTypes": Array [
+    "Foo",
+  ],
+  "data": "# The file out.gql was auto-generated from infile.ts using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 # on behalf of
 # foo (foo.com)
 
 union Foo = String
-"
+",
+  "notConvertedTypes": Array [],
+}
 `;
 
 exports[`graphql-to-core-types header comment Filename 1`] = `
-"# The file out.gql was auto-generated using
+Object {
+  "convertedTypes": Array [
+    "Foo",
+  ],
+  "data": "# The file out.gql was auto-generated using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 
 union Foo = String
-"
+",
+  "notConvertedTypes": Array [],
+}
 `;
 
 exports[`graphql-to-core-types header comment Source filename 1`] = `
-"# This file was auto-generated from infile.ts using
+Object {
+  "convertedTypes": Array [
+    "Foo",
+  ],
+  "data": "# This file was auto-generated from infile.ts using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 
 union Foo = String
-"
+",
+  "notConvertedTypes": Array [],
+}
 `;
 
 exports[`graphql-to-core-types header comment User package 1`] = `
-"# This file was auto-generated using
+Object {
+  "convertedTypes": Array [
+    "Foo",
+  ],
+  "data": "# This file was auto-generated using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 # on behalf of
 # foo
 
 union Foo = String
-"
+",
+  "notConvertedTypes": Array [],
+}
 `;
 
 exports[`graphql-to-core-types header comment User package url 1`] = `
-"# This file was auto-generated using
+Object {
+  "convertedTypes": Array [
+    "Foo",
+  ],
+  "data": "# This file was auto-generated using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 # on behalf of
 # foo.com
 
 union Foo = String
-"
+",
+  "notConvertedTypes": Array [],
+}
 `;
 
 exports[`graphql-to-core-types used in readme 1`] = `
-"# This file was auto-generated using
+Object {
+  "convertedTypes": Array [
+    "User",
+    "ChatLine",
+  ],
+  "data": "# This file was auto-generated using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 
 \\"\\"\\"
@@ -93,5 +134,7 @@ type ChatLine {
   user: User!
   line: String!
 }
-"
+",
+  "notConvertedTypes": Array [],
+}
 `;
