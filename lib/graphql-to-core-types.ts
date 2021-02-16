@@ -13,6 +13,7 @@ import {
 	StringType,
 	UnsupportedError,
 	ConversionResult,
+	throwRelatedError,
 } from 'core-types'
 import {
 	DocumentNode,
@@ -22,10 +23,12 @@ import {
 	NameNode,
 	UnionTypeDefinitionNode,
 	parse,
+	GraphQLError,
 } from 'graphql'
 import { parseDescription } from './annotation'
 import { gqlStripRequired, isRequired } from './gql-utils'
 import { GraphqlToCoreTypesOptions } from './types'
+import { gqlLocationsToCoreTypesLocation } from './utils'
 
 
 export function getGraphqlAst( source: string )
@@ -45,7 +48,26 @@ export function convertGraphqlToCoreTypes(
 		unsupported = 'ignore',
 	} = options ?? { };
 
-	const document = getGraphqlAst( source );
+	let document: DocumentNode;
+	try
+	{
+		document = getGraphqlAst( source );
+	}
+	catch ( err )
+	{
+		if ( err instanceof GraphQLError )
+			throwRelatedError(
+				err,
+				{
+					source,
+					loc: gqlLocationsToCoreTypesLocation(
+						source,
+						err.locations ?? [ ]
+					)
+				}
+			);
+		throw err;
+	}
 
 	if ( document.kind !== 'Document' )
 		throw new UnsupportedError(
