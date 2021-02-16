@@ -155,7 +155,7 @@ export function convertCoreTypesToGraphqlAst(
 						},
 						ctx
 					);
-				if ( node.type === 'null' )
+				else if ( node.type === 'null' )
 				{
 					if ( nullTypeName )
 						return gqlUnionTypeOfTypes(
@@ -165,7 +165,7 @@ export function convertCoreTypesToGraphqlAst(
 						);
 					return handleUnsupported( ctx, node, [ index ] );
 				}
-				if ( node.type === 'or' )
+				else if ( node.type === 'or' )
 				{
 					return makeUnionType( node, ctx );
 				}

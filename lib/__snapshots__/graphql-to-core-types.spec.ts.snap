@@ -1,5 +1,26 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`graphql-to-core-types enums 1`] = `
+Array [
+  Object {
+    "enum": Array [
+      "None",
+      "Low",
+      "_2",
+      "_3",
+      "High",
+    ],
+    "loc": Object {
+      "end": 93,
+      "start": 3,
+    },
+    "name": "CompressionLevel",
+    "title": "Compression levels",
+    "type": "string",
+  },
+]
+`;
+
 exports[`graphql-to-core-types unions and objects 1`] = `
 Array [
   Object {

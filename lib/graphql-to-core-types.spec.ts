@@ -39,4 +39,19 @@ describe( "graphql-to-core-types", ( ) =>
 		const ct = convertGraphqlToCoreTypes( schema ).data.types;
 		expect( ct ).toMatchSnapshot( );
 	} );
+
+	it( "enums", ( ) =>
+	{
+		const schema = `
+		"Compression levels"
+		enum CompressionLevel {
+			None,
+			Low,
+			_2,
+			_3,
+			High,
+		}`;
+		const ct = convertGraphqlToCoreTypes( schema ).data.types;
+		expect( ct ).toMatchSnapshot( );
+	} );
 } );

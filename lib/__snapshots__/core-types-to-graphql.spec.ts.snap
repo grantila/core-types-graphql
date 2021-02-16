@@ -34,6 +34,24 @@ type Foo {
 }
 `;
 
+exports[`graphql-to-core-types enums 1`] = `
+Object {
+  "convertedTypes": Array [
+    "Output",
+    "CompressionLevel",
+  ],
+  "data": "# This file was auto-generated using
+# core-types-graphql (https://github.com/grantila/core-types-graphql)
+
+\\"Output type\\"
+union Output = String
+
+union CompressionLevel = Int
+",
+  "notConvertedTypes": Array [],
+}
+`;
+
 exports[`graphql-to-core-types header comment Everything 1`] = `
 Object {
   "convertedTypes": Array [

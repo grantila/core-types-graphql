@@ -119,6 +119,15 @@ export function convertGraphqlToCoreTypes(
 				)
 			};
 		}
+		else if ( definition.kind === 'EnumTypeDefinition' )
+		{
+			const fields = definition.values ?? [ ];
+			return {
+				...parseCommonFields( definition ),
+				type: 'string',
+				enum: fields.map( field => field.name.value ),
+			};
+		}
 		else
 		{
 			if ( unsupported === 'ignore' )

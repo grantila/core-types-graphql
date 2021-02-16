@@ -167,4 +167,23 @@ describe( "graphql-to-core-types", ( ) =>
 
 		expect( graphql ).toMatchSnapshot( );
 	} );
+
+	it( "enums", ( ) =>
+	{
+		const graphql = convertCoreTypesToGraphql( wrapDocument( [
+			{
+				name: 'Output',
+				title: 'Output type',
+				type: 'string',
+				enum: [ "JSON", "Text", "Array buffer" ],
+			},
+			{
+				name: 'CompressionLevel',
+				type: 'integer',
+				enum: [ 0, 1, 2, 3, 4, 5 ],
+			},
+		] ) );
+
+		expect( graphql ).toMatchSnapshot( );
+	} );
 } );
