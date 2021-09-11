@@ -206,7 +206,7 @@ function handleUnsupported( ctx: Context, node: NodeType, path?: NodePath )
 	{
 		if ( ctx.options.unsupported === 'error' )
 			throw err;
-		ctx.options.warn( message, err );
+		ctx.options.warn( message, err as UnsupportedError );
 	}
 }
 
