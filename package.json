@@ -34,7 +34,7 @@
     "gql"
   ],
   "dependencies": {
-    "core-types": "^1.8.2",
+    "core-types": "^1.9.1",
     "graphql": "^15.5.0"
   },
   "devDependencies": {
