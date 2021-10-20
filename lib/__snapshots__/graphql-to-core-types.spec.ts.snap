@@ -3,6 +3,7 @@
 exports[`graphql-to-core-types enums 1`] = `
 Array [
   Object {
+    "description": "Compression levels",
     "enum": Array [
       "None",
       "Low",
@@ -15,7 +16,7 @@ Array [
       "start": 3,
     },
     "name": "CompressionLevel",
-    "title": "Compression levels",
+    "title": "CompressionLevel",
     "type": "string",
   },
 ]
@@ -24,15 +25,17 @@ Array [
 exports[`graphql-to-core-types unions and objects 1`] = `
 Array [
   Object {
+    "description": "Kind of a string",
     "loc": Object {
       "end": 48,
       "start": 3,
     },
     "name": "Stringish",
-    "title": "Kind of a string",
+    "title": "Stringish",
     "type": "string",
   },
   Object {
+    "description": "string or foo",
     "loc": Object {
       "end": 97,
       "start": 52,
@@ -48,12 +51,12 @@ Array [
         "type": "ref",
       },
     ],
-    "title": "string or foo",
+    "title": "Bar",
     "type": "or",
   },
   Object {
     "additionalProperties": false,
-    "description": "fyi",
+    "description": "This is a foo\n\nfyi",
     "loc": Object {
       "end": 350,
       "start": 101,
@@ -63,6 +66,7 @@ Array [
       "age": Object {
         "node": Object {
           "default": "42",
+          "description": "optional prop",
           "examples": Array [
             "4",
             "{
@@ -73,25 +77,27 @@ Array [
             "end": 312,
             "start": 193,
           },
-          "title": "optional prop",
+          "title": "Foo.age",
           "type": "integer",
         },
         "required": false,
       },
       "bar": Object {
         "node": Object {
+          "description": "The whiskey bar",
           "loc": Object {
             "end": 346,
             "start": 316,
           },
           "ref": "Bar",
-          "title": "The whiskey bar",
+          "title": "Foo.bar",
           "type": "ref",
         },
         "required": true,
       },
       "name": Object {
         "node": Object {
+          "description": "required prop",
           "elementType": Object {
             "ref": "Stringish",
             "type": "ref",
@@ -100,13 +106,13 @@ Array [
             "end": 188,
             "start": 150,
           },
-          "title": "required prop",
+          "title": "Foo.name",
           "type": "array",
         },
         "required": true,
       },
     },
-    "title": "This is a foo",
+    "title": "Foo",
     "type": "object",
   },
 ]

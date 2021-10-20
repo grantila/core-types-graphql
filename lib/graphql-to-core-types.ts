@@ -115,7 +115,9 @@ export function convertGraphqlToCoreTypes(
 				type: 'object',
 				additionalProperties: false,
 				properties: Object.fromEntries(
-					fields.map( field => parseObjectField( field ) )
+					fields.map( field =>
+						parseObjectField( field, definition )
+					)
 				)
 			};
 		}
@@ -161,23 +163,26 @@ export function convertGraphqlToCoreTypes(
 }
 
 function parseCommonFields(
-	type: Pick< UnionTypeDefinitionNode, 'description' | 'loc' | 'name' >
+	type: Pick< UnionTypeDefinitionNode, 'description' | 'loc' | 'name' >,
+	parent?: { readonly name: NameNode; }
 )
 : Omit< NamedType< NodeType >, 'type' >
 {
 	return {
 		name: parseName( type.name ),
-		...parseCommonFieldsWithoutName( type ),
+		...parseCommonFieldsWithoutName( type, parent ),
 	};
 }
 
 function parseCommonFieldsWithoutName(
-	type: Pick< UnionTypeDefinitionNode, 'description' | 'loc' >
+	type: Pick< UnionTypeDefinitionNode, 'description' | 'loc' | 'name' >,
+	parent?: { readonly name: NameNode; }
 )
 : Omit< NamedType< NodeType >, 'type' | 'name' >
 {
 	return {
 		...parseDescription( type.description ),
+		title: parseTitle( type.name, parent ),
 		...( type.loc ? { loc: type.loc } : { } ),
 	};
 }
@@ -187,7 +192,18 @@ function parseName( name: NameNode ): string
 	return name.value;
 }
 
-function parseFieldType( field: NamedTypeNode | ListTypeNode )
+function parseTitle( name: NameNode, parent?: { readonly name: NameNode; } )
+: string
+{
+	if ( parent?.name )
+		return `${parent.name.value}.${name.value}`;
+	return name.value;
+}
+
+function parseFieldType(
+	field: NamedTypeNode | ListTypeNode,
+	parent: { readonly name: NameNode; }
+)
 :
 	| ArrayType
 	| BooleanType
@@ -202,29 +218,38 @@ function parseFieldType( field: NamedTypeNode | ListTypeNode )
 			type: 'array',
 			elementType:
 				isRequired( field.type )
-				? parseFieldType( field.type.type )
+				? parseFieldType( field.type.type, parent )
 				: {
 					type: "or",
 					or: [
 						{ type: 'null' },
-						parseFieldType( field.type ),
+						parseFieldType( field.type, parent ),
 					]
 				},
-			...parseCommonFieldsWithoutName( field ),
+			...parseCommonFieldsWithoutName(
+				{
+					...field,
+					name: { kind: 'Name', value: '[]' },
+				},
+				parent
+			),
 		};
 	else
 		return parseType( field );
 }
 
-function parseObjectField( field: FieldDefinitionNode )
+function parseObjectField(
+	field: FieldDefinitionNode,
+	parent: { readonly name: NameNode; }
+)
 : [ string, ObjectProperty ]
 {
 	return [
 		parseName( field.name ),
 		{
 			node: {
-				...parseFieldType( gqlStripRequired( field.type ) ),
-				...parseCommonFieldsWithoutName( field ),
+				...parseFieldType( gqlStripRequired( field.type ), parent ),
+				...parseCommonFieldsWithoutName( field, parent ),
 			},
 			required: isRequired( field.type ),
 		}

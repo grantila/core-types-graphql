@@ -138,7 +138,7 @@ Object {
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 
 \\"\\"\\"
-# User type
+User type
 
 This type holds the user information, such as name
 \\"\\"\\"

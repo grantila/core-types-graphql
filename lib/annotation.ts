@@ -12,12 +12,10 @@ export function stringifyAnnotations(
 	ctx: Context
 ): string
 {
-	const { title, description, examples, default: _default, comment } = node;
+	const { description, examples, default: _default, comment } = node;
 	const exampleArray = ensureArray( examples );
-	const isMultiline = !!description || exampleArray.length > 0 || !!_default;
 	const fullComment =
 		[
-			...( title ? [ formatTitle( title, isMultiline ) ] : [ ] ),
 			description,
 			...( examples == undefined ? [ ] : [
 				formatExamples( exampleArray, ctx )
@@ -32,18 +30,6 @@ export function stringifyAnnotations(
 		.trim( );
 
 	return fullComment;
-}
-
-function formatTitle( title: string, isMultiline: boolean )
-{
-	const makeNoHeader =
-		// Shouldn't turn multiline title into header
-		title.includes( "\n" ) ||
-		// Shouldn't make header if already header
-		title.startsWith( "#" ) ||
-		// Shouldn't make header for non-block descriptions
-		!isMultiline;
-	return makeNoHeader ? title : `# ${title}`;
 }
 
 function enquoteCode( code: string, ctx: Context )
@@ -95,12 +81,11 @@ export function parseDescription(
 	if ( !descriptionText )
 		return { };
 
-	const title = [ ] as Array< string >;
 	const description = [ ] as Array< string >;
 	const examples = [ ] as Array< Array< string > >;
 	const _default = [ ] as Array< string >;
 
-	let where: 'title' | 'description' | 'examples' | 'default' = 'title';
+	let where: 'description' | 'examples' | 'default' = 'description';
 
 	descriptionText
 		.split( "\n" )
@@ -121,39 +106,14 @@ export function parseDescription(
 				examples[ examples.length - 1 ].push( line );
 			else if ( where === 'default' )
 				_default.push( line );
-			else if ( where === 'title' )
-			{
-				if ( line === '' )
-					where = 'description';
-				else if ( title.length > 0 && line.match( /^#/ ))
-				{
-					// Unknown header when we already have title -> description
-					where = 'description';
-					description.push( line );
-				}
-				else
-				{
-					if ( title.length === 0 && line.match( /^#/ ) )
-					{
-						// Strip heading marker from title
-						title.push( line.replace( /^#+\s*/, '' ) );
-					}
-					else
-						title.push( line );
-				}
-			}
 			else // 'description'
 				description.push( line );
 		} );
 
 	return {
 		...(
-			title.length === 0 ? { } :
-			{ title: joinUnindentedBlock( title ) }
-		),
-		...(
 			description.length === 0 ? { } :
-			{ description: joinUnindentedBlock( description ) }
+			{ description: joinUnindentedBlock( description ).trim( ) }
 		),
 		...(
 			examples.length === 0

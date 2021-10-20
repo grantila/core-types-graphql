@@ -139,13 +139,13 @@ describe( "graphql-to-core-types", ( ) =>
 		const graphql = convertCoreTypesToGraphql( wrapDocument( [
 			{
 				name: 'User',
-				title: 'User type',
-				description:
+				title: 'User',
+				description: 'User type\n\n' +
 					'This type holds the user information, such as name',
 				type: 'object',
 				properties: {
 					name: {
-						node: { type: 'string', title: 'The real name' },
+						node: { type: 'string', description: 'The real name' },
 						required: true
 					},
 				},
@@ -153,7 +153,8 @@ describe( "graphql-to-core-types", ( ) =>
 			},
 			{
 				name: 'ChatLine',
-				title: 'A chat line',
+				title: 'ChatLine',
+				description: 'A chat line',
 				type: 'object',
 				properties: {
 					user: {
@@ -173,7 +174,8 @@ describe( "graphql-to-core-types", ( ) =>
 		const graphql = convertCoreTypesToGraphql( wrapDocument( [
 			{
 				name: 'Output',
-				title: 'Output type',
+				title: 'Output',
+				description: 'Output type',
 				type: 'string',
 				enum: [ "JSON", "Text", "Array buffer" ],
 			},
