@@ -6,12 +6,13 @@ import {
 	NonNullTypeNode,
 	StringValueNode,
 	UnionTypeDefinitionNode,
+	Kind,
 } from 'graphql'
 
 
 export function gqlNameNode( name: string ): NameNode
 {
-	return { kind: 'Name', value: name };
+	return { kind: Kind.NAME, value: name };
 }
 
 export interface UnionTypeOptions
@@ -25,7 +26,7 @@ export function gqlUnionType( { name, description, types }: UnionTypeOptions )
 : UnionTypeDefinitionNode
 {
 	return {
-		kind: 'UnionTypeDefinition',
+		kind: Kind.UNION_TYPE_DEFINITION,
 		name,
 		...( description ? { description } : { } ),
 		types,
@@ -34,12 +35,12 @@ export function gqlUnionType( { name, description, types }: UnionTypeOptions )
 
 export function gqlNamedTypeNode( name: string ): NamedTypeNode
 {
-	return { kind: 'NamedType', name: gqlNameNode( name ) };
+	return { kind: Kind.NAMED_TYPE, name: gqlNameNode( name ) };
 }
 
 export function gqlListTypeNode( type: TypeNode ): ListTypeNode
 {
-	return { kind: 'ListType', type };
+	return { kind: Kind.LIST_TYPE, type };
 }
 
 export function gqlMaybeRequiredNode(
@@ -48,7 +49,7 @@ export function gqlMaybeRequiredNode(
 )
 : NonNullTypeNode | NamedTypeNode | ListTypeNode
 {
-	return !required ? type : { kind: 'NonNullType', type };
+	return !required ? type : { kind: Kind.NON_NULL_TYPE, type };
 }
 
 export function gqlStripRequired(
@@ -64,5 +65,5 @@ export function isRequired(
 )
 : type is NonNullTypeNode
 {
-	return type.kind === 'NonNullType';
+	return type.kind === Kind.NON_NULL_TYPE;
 }

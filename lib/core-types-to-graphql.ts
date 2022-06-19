@@ -24,6 +24,7 @@ import {
 	StringValueNode,
 	TypeDefinitionNode,
 	UnionTypeDefinitionNode,
+	Kind,
 	print,
 } from 'graphql'
 import {
@@ -184,7 +185,7 @@ export function convertCoreTypesToGraphqlAst(
 	return {
 		data: {
 			definitions,
-			kind: 'Document',
+			kind: Kind.DOCUMENT,
 		},
 		convertedTypes,
 		notConvertedTypes,
@@ -210,6 +211,13 @@ function handleUnsupported( ctx: Context, node: NodeType, path?: NodePath )
 	}
 }
 
+function ensureEndingNewLine( text: string )
+{
+	if ( text.length && !text.endsWith( '\n' ) )
+		return text + '\n';
+	return text;
+}
+
 export function convertCoreTypesToGraphql(
 	doc: NodeDocument,
 	options: CoreTypesToGraphqlOptions = { }
@@ -233,7 +241,9 @@ export function convertCoreTypesToGraphql(
 		: undefined;
 
 	return {
-		data: ( header ? `${header}\n\n` : '' ) + print( ast ),
+		data: ensureEndingNewLine(
+			( header ? `${header}\n\n` : '' ) + print( ast )
+		),
 		convertedTypes,
 		notConvertedTypes,
 	};
@@ -291,7 +301,7 @@ function makeObjectType( node: NamedType< ObjectType >, ctx: Context )
 {
 	return {
 		...makeCommonTypeProperties( node, ctx ),
-		kind: 'ObjectTypeDefinition',
+		kind: Kind.OBJECT_TYPE_DEFINITION,
 		fields: Object.entries( node.properties )
 			.map(
 				( [ name, { node: child, required } ] )
@@ -306,7 +316,7 @@ function makeObjectType( node: NamedType< ObjectType >, ctx: Context )
 					if ( typeNode === undefined )
 						return undefined;
 					return {
-						kind: 'FieldDefinition',
+						kind: Kind.FIELD_DEFINITION,
 						...makeCommonTypePropertiesWithoutName( child, ctx ),
 						name: gqlNameNode( name ),
 						type: gqlMaybeRequiredNode( typeNode, required ),
@@ -403,7 +413,7 @@ function annotationToComment( node: CoreTypeAnnotations, ctx: Context )
 	if ( !comment )
 		return undefined;
 	return {
-		kind: 'StringValue',
+		kind: Kind.STRING,
 		value: comment,
 		block: comment.includes( "\n" ),
 	};

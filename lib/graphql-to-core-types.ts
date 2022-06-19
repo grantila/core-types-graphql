@@ -24,6 +24,7 @@ import {
 	UnionTypeDefinitionNode,
 	parse,
 	GraphQLError,
+	Kind,
 } from 'graphql'
 import { parseDescription } from './annotation'
 import { gqlStripRequired, isRequired } from './gql-utils'
@@ -69,7 +70,7 @@ export function convertGraphqlToCoreTypes(
 		throw err;
 	}
 
-	if ( document.kind !== 'Document' )
+	if ( document.kind !== Kind.DOCUMENT )
 		throw new UnsupportedError(
 			`Invalid document type "${document.kind}"`,
 			{
@@ -84,7 +85,7 @@ export function convertGraphqlToCoreTypes(
 	const types = document.definitions
 	.map( ( definition ): NamedType< NodeType > | undefined =>
 	{
-		if ( definition.kind === 'UnionTypeDefinition' )
+		if ( definition.kind === Kind.UNION_TYPE_DEFINITION )
 		{
 			if ( !definition.types?.length )
 			{
@@ -107,7 +108,7 @@ export function convertGraphqlToCoreTypes(
 					or: definition.types.map( type => parseType( type ) ),
 				};
 		}
-		else if ( definition.kind === 'ObjectTypeDefinition' )
+		else if ( definition.kind === Kind.OBJECT_TYPE_DEFINITION )
 		{
 			const fields = definition.fields ?? [ ];
 			return {
@@ -121,7 +122,7 @@ export function convertGraphqlToCoreTypes(
 				)
 			};
 		}
-		else if ( definition.kind === 'EnumTypeDefinition' )
+		else if ( definition.kind === Kind.ENUM_TYPE_DEFINITION )
 		{
 			const fields = definition.values ?? [ ];
 			return {
@@ -213,7 +214,7 @@ function parseFieldType(
 	| RefType
 	| OrType
 {
-	if ( field.kind === 'ListType' )
+	if ( field.kind === Kind.LIST_TYPE )
 		return {
 			type: 'array',
 			elementType:
@@ -229,7 +230,7 @@ function parseFieldType(
 			...parseCommonFieldsWithoutName(
 				{
 					...field,
-					name: { kind: 'Name', value: '[]' },
+					name: { kind: Kind.NAME, value: '[]' },
 				},
 				parent
 			),
