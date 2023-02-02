@@ -2,7 +2,6 @@
 [![downloads][downloads-image]][npm-url]
 [![build status][build-image]][build-url]
 [![coverage status][coverage-image]][coverage-url]
-[![Language grade: JavaScript][lgtm-image]][lgtm-url]
 [![Node.JS version][node-version]][node-url]
 
 
@@ -126,7 +125,7 @@ This package exports two utility functions; `getBreakingChanges` and `getDangero
 [npm-image]: https://img.shields.io/npm/v/core-types-graphql.svg
 [npm-url]: https://npmjs.org/package/core-types-graphql
 [downloads-image]: https://img.shields.io/npm/dm/core-types-graphql.svg
-[build-image]: https://img.shields.io/github/workflow/status/grantila/core-types-graphql/Master.svg
+[build-image]: https://img.shields.io/github/actions/workflow/status/grantila/core-types-graphql/master.yml?branch=master
 [build-url]: https://github.com/grantila/core-types-graphql/actions?query=workflow%3AMaster
 [coverage-image]: https://coveralls.io/repos/github/grantila/core-types-graphql/badge.svg?branch=master
 [coverage-url]: https://coveralls.io/github/grantila/core-types-graphql?branch=master
