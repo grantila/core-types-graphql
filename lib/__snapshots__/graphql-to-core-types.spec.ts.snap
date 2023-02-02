@@ -1,17 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`graphql-to-core-types enums 1`] = `
-Array [
-  Object {
+[
+  {
     "description": "Compression levels",
-    "enum": Array [
+    "enum": [
       "None",
       "Low",
       "_2",
       "_3",
       "High",
     ],
-    "loc": Object {
+    "loc": {
       "end": 93,
       "start": 3,
     },
@@ -23,10 +23,10 @@ Array [
 `;
 
 exports[`graphql-to-core-types unions and objects 1`] = `
-Array [
-  Object {
+[
+  {
     "description": "Kind of a string",
-    "loc": Object {
+    "loc": {
       "end": 48,
       "start": 3,
     },
@@ -34,19 +34,19 @@ Array [
     "title": "Stringish",
     "type": "string",
   },
-  Object {
+  {
     "description": "string or foo",
-    "loc": Object {
+    "loc": {
       "end": 97,
       "start": 52,
     },
     "name": "Bar",
-    "or": Array [
-      Object {
+    "or": [
+      {
         "ref": "Stringish",
         "type": "ref",
       },
-      Object {
+      {
         "ref": "Foo",
         "type": "ref",
       },
@@ -54,26 +54,28 @@ Array [
     "title": "Bar",
     "type": "or",
   },
-  Object {
+  {
     "additionalProperties": false,
-    "description": "This is a foo\n\nfyi",
-    "loc": Object {
+    "description": "This is a foo
+
+fyi",
+    "loc": {
       "end": 350,
       "start": 101,
     },
     "name": "Foo",
-    "properties": Object {
-      "age": Object {
-        "node": Object {
+    "properties": {
+      "age": {
+        "node": {
           "default": "42",
           "description": "optional prop",
-          "examples": Array [
+          "examples": [
             "4",
             "{
 	foo: 'bar'
 }",
           ],
-          "loc": Object {
+          "loc": {
             "end": 312,
             "start": 193,
           },
@@ -82,10 +84,10 @@ Array [
         },
         "required": false,
       },
-      "bar": Object {
-        "node": Object {
+      "bar": {
+        "node": {
           "description": "The whiskey bar",
-          "loc": Object {
+          "loc": {
             "end": 346,
             "start": 316,
           },
@@ -95,14 +97,14 @@ Array [
         },
         "required": true,
       },
-      "name": Object {
-        "node": Object {
+      "name": {
+        "node": {
           "description": "required prop",
-          "elementType": Object {
+          "elementType": {
             "ref": "Stringish",
             "type": "ref",
           },
-          "loc": Object {
+          "loc": {
             "end": 188,
             "start": 150,
           },

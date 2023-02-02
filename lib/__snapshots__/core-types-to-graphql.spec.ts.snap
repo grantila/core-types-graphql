@@ -1,60 +1,60 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`graphql-to-core-types Object type 1`] = `
-Object {
-  "convertedTypes": Array [
+{
+  "convertedTypes": [
     "Foo",
   ],
   "data": "# This file was auto-generated using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 
-\\"\\"\\"
+"""
 This is a foo
 
 # example
     \`{ req: 'the foo', opt: 4 }\`
-\\"\\"\\"
+"""
 type Foo {
-  \\"required...\\"
+  "required..."
   req: String!
-  \\"\\"\\"
+  """
   # example
       \`5\`
   # example
       \`8\`
-  \\"\\"\\"
+  """
   opt: Int
-  \\"optional array...\\"
+  "optional array..."
   optarr: [String!]
   decimal: Float
   someref: UserBlob!
 }
 ",
-  "notConvertedTypes": Array [],
+  "notConvertedTypes": [],
 }
 `;
 
 exports[`graphql-to-core-types enums 1`] = `
-Object {
-  "convertedTypes": Array [
+{
+  "convertedTypes": [
     "Output",
     "CompressionLevel",
   ],
   "data": "# This file was auto-generated using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 
-\\"Output type\\"
+"Output type"
 union Output = String
 
 union CompressionLevel = Int
 ",
-  "notConvertedTypes": Array [],
+  "notConvertedTypes": [],
 }
 `;
 
 exports[`graphql-to-core-types header comment Everything 1`] = `
-Object {
-  "convertedTypes": Array [
+{
+  "convertedTypes": [
     "Foo",
   ],
   "data": "# The file out.gql was auto-generated from infile.ts using
@@ -64,13 +64,13 @@ Object {
 
 union Foo = String
 ",
-  "notConvertedTypes": Array [],
+  "notConvertedTypes": [],
 }
 `;
 
 exports[`graphql-to-core-types header comment Filename 1`] = `
-Object {
-  "convertedTypes": Array [
+{
+  "convertedTypes": [
     "Foo",
   ],
   "data": "# The file out.gql was auto-generated using
@@ -78,13 +78,13 @@ Object {
 
 union Foo = String
 ",
-  "notConvertedTypes": Array [],
+  "notConvertedTypes": [],
 }
 `;
 
 exports[`graphql-to-core-types header comment Source filename 1`] = `
-Object {
-  "convertedTypes": Array [
+{
+  "convertedTypes": [
     "Foo",
   ],
   "data": "# This file was auto-generated from infile.ts using
@@ -92,13 +92,13 @@ Object {
 
 union Foo = String
 ",
-  "notConvertedTypes": Array [],
+  "notConvertedTypes": [],
 }
 `;
 
 exports[`graphql-to-core-types header comment User package 1`] = `
-Object {
-  "convertedTypes": Array [
+{
+  "convertedTypes": [
     "Foo",
   ],
   "data": "# This file was auto-generated using
@@ -108,13 +108,13 @@ Object {
 
 union Foo = String
 ",
-  "notConvertedTypes": Array [],
+  "notConvertedTypes": [],
 }
 `;
 
 exports[`graphql-to-core-types header comment User package url 1`] = `
-Object {
-  "convertedTypes": Array [
+{
+  "convertedTypes": [
     "Foo",
   ],
   "data": "# This file was auto-generated using
@@ -124,35 +124,35 @@ Object {
 
 union Foo = String
 ",
-  "notConvertedTypes": Array [],
+  "notConvertedTypes": [],
 }
 `;
 
 exports[`graphql-to-core-types used in readme 1`] = `
-Object {
-  "convertedTypes": Array [
+{
+  "convertedTypes": [
     "User",
     "ChatLine",
   ],
   "data": "# This file was auto-generated using
 # core-types-graphql (https://github.com/grantila/core-types-graphql)
 
-\\"\\"\\"
+"""
 User type
 
 This type holds the user information, such as name
-\\"\\"\\"
+"""
 type User {
-  \\"The real name\\"
+  "The real name"
   name: String!
 }
 
-\\"A chat line\\"
+"A chat line"
 type ChatLine {
   user: User!
   line: String!
 }
 ",
-  "notConvertedTypes": Array [],
+  "notConvertedTypes": [],
 }
 `;
