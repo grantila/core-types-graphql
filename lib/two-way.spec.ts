@@ -1,5 +1,5 @@
-import { convertGraphqlToCoreTypes } from './graphql-to-core-types'
-import { convertCoreTypesToGraphql } from './core-types-to-graphql'
+import { convertGraphqlToCoreTypes } from './graphql-to-core-types.js'
+import { convertCoreTypesToGraphql } from './core-types-to-graphql.js'
 
 
 describe( "two-way", ( ) =>

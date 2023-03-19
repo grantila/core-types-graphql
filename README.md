@@ -16,12 +16,20 @@ Other conversion packages:
  * [`core-types-json-schema`][core-types-json-schema-github-url]
 
 
+# Versions
+
+Since 3.0, this package is pure ESM and requires Node 14.13.1 or later.
+
+
 # Contents
 
- * [Usage](#usage)
-   * [core-types to GraphQL](#core-types-to-graphql)
-   * [GraphQL to core-types](#graphql-to-core-types)
- * [Utilities](#utilities)
+- [core-types-graphql](#core-types-graphql)
+- [Versions](#versions)
+- [Contents](#contents)
+- [Usage](#usage)
+	- [core-types to GraphQL](#core-types-to-graphql)
+	- [GraphQL to core-types](#graphql-to-core-types)
+- [Utilities](#utilities)
 
 
 # Usage
@@ -129,8 +137,6 @@ This package exports two utility functions; `getBreakingChanges` and `getDangero
 [build-url]: https://github.com/grantila/core-types-graphql/actions?query=workflow%3AMaster
 [coverage-image]: https://coveralls.io/repos/github/grantila/core-types-graphql/badge.svg?branch=master
 [coverage-url]: https://coveralls.io/github/grantila/core-types-graphql?branch=master
-[lgtm-image]: https://img.shields.io/lgtm/grade/javascript/g/grantila/core-types-graphql.svg?logo=lgtm&logoWidth=18
-[lgtm-url]: https://lgtm.com/projects/g/grantila/core-types-graphql/context:javascript
 [node-version]: https://img.shields.io/node/v/core-types-graphql
 [node-url]: https://nodejs.org/en/
 

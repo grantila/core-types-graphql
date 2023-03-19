@@ -1,35 +1,36 @@
 import {
-	NodeDocument,
-	ArrayType,
-	BooleanType,
-	CoreTypesErrorMeta,
-	IntegerType,
-	NamedType,
-	NodeType,
-	NumberType,
-	ObjectProperty,
-	OrType,
-	RefType,
-	StringType,
-	UnsupportedError,
-	ConversionResult,
+	type ArrayType,
+	type BooleanType,
+	type ConversionResult,
+	type CoreTypesErrorMeta,
+	type IntegerType,
+	type NamedType,
+	type NodeDocument,
+	type NodeType,
+	type NumberType,
+	type ObjectProperty,
+	type OrType,
+	type RefType,
+	type StringType,
 	throwRelatedError,
+	UnsupportedError,
 } from 'core-types'
 import {
-	DocumentNode,
-	FieldDefinitionNode,
-	ListTypeNode,
-	NamedTypeNode,
-	NameNode,
-	UnionTypeDefinitionNode,
-	parse,
+	type DocumentNode,
+	type FieldDefinitionNode,
+	type ListTypeNode,
+	type NamedTypeNode,
+	type NameNode,
+	type UnionTypeDefinitionNode,
 	GraphQLError,
 	Kind,
+	parse,
 } from 'graphql'
-import { parseDescription } from './annotation'
-import { gqlStripRequired, isRequired } from './gql-utils'
-import { GraphqlToCoreTypesOptions } from './types'
-import { gqlLocationsToCoreTypesLocation } from './utils'
+
+import { parseDescription } from './annotation.js'
+import { gqlStripRequired, isRequired } from './gql-utils.js'
+import { GraphqlToCoreTypesOptions } from './types.js'
+import { gqlLocationsToCoreTypesLocation } from './utils.js'
 
 
 export function getGraphqlAst( source: string )

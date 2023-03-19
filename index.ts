@@ -1,19 +1,17 @@
-Object.fromEntries ??= require( 'fromentries' );
-
 export type {
 	CoreTypesToGraphqlOptions,
 	GraphqlToCoreTypesOptions,
 	NameGeneratorFunction,
-} from './lib/types'
+} from './lib/types.js'
 export {
 	convertCoreTypesToGraphql,
 	convertCoreTypesToGraphqlAst,
-} from './lib/core-types-to-graphql'
+} from './lib/core-types-to-graphql.js'
 export {
 	convertGraphqlToCoreTypes,
 	getGraphqlAst,
-} from './lib/graphql-to-core-types'
+} from './lib/graphql-to-core-types.js'
 export {
 	getBreakingChanges,
 	getDangerousChanges,
-} from './lib/schema'
+} from './lib/schema.js'

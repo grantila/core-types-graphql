@@ -1,6 +1,7 @@
-import { CoreTypeAnnotations, ensureArray } from "core-types"
+import { type CoreTypeAnnotations, ensureArray } from "core-types"
 import { StringValueNode } from "graphql"
-import { Context } from "./types"
+
+import { Context } from "./types.js"
 
 
 /**

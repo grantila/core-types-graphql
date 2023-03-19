@@ -1,45 +1,46 @@
 import {
-	ArrayType,
-	CoreTypeAnnotations,
-	NamedType,
-	NodeType,
-	TupleType,
-	ObjectType,
-	OrType,
+	type ArrayType,
+	type ConversionResult,
+	type CoreTypeAnnotations,
+	type NamedType,
+	type NodeDocument,
+	type NodePath,
+	type NodeType,
+	type ObjectType,
+	type OrType,
+	type TupleType,
 	extractAnnotations,
-	throwUnsupportedError,
-	NodePath,
 	isNonNullable,
-	NodeDocument,
+	throwUnsupportedError,
 	UnsupportedError,
-	ConversionResult,
 } from 'core-types'
 import {
-	DefinitionNode,
-	DocumentNode,
-	FieldDefinitionNode,
-	ListTypeNode,
-	NamedTypeNode,
-	ObjectTypeDefinitionNode,
-	StringValueNode,
-	TypeDefinitionNode,
-	UnionTypeDefinitionNode,
+	type DefinitionNode,
+	type DocumentNode,
+	type FieldDefinitionNode,
+	type ListTypeNode,
+	type NamedTypeNode,
+	type ObjectTypeDefinitionNode,
+	type StringValueNode,
+	type TypeDefinitionNode,
+	type UnionTypeDefinitionNode,
 	Kind,
 	print,
 } from 'graphql'
+
 import {
-	gqlNameNode,
-	gqlNamedTypeNode,
-	gqlUnionType,
 	gqlListTypeNode,
 	gqlMaybeRequiredNode,
-} from './gql-utils'
-import { stringifyAnnotations } from './annotation'
+	gqlNamedTypeNode,
+	gqlNameNode,
+	gqlUnionType,
+} from './gql-utils.js'
+import { stringifyAnnotations } from './annotation.js'
 import type {
 	Context,
 	CoreTypesToGraphqlOptions,
 	NameGeneratorTestFunction,
-} from './types'
+} from './types.js'
 
 
 function defaultNameGenerator(

@@ -1,4 +1,4 @@
-import { getBreakingChanges, getDangerousChanges } from './schema'
+import { getBreakingChanges, getDangerousChanges } from './schema.js'
 
 
 describe( "schema", ( ) =>

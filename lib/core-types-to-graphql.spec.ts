@@ -1,5 +1,10 @@
-import { NamedType, NodeDocument, UnsupportedError } from 'core-types'
-import { convertCoreTypesToGraphql } from './core-types-to-graphql'
+import {
+	type NamedType,
+	type NodeDocument,
+	UnsupportedError,
+} from 'core-types'
+
+import { convertCoreTypesToGraphql } from './core-types-to-graphql.js'
 
 
 const wrapDocument = ( types: Array< NamedType > ): NodeDocument =>

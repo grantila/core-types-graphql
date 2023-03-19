@@ -1,5 +1,5 @@
-import { NodeType, WarnFunction } from 'core-types'
-import { TypeDefinitionNode } from 'graphql'
+import type { NodeType, WarnFunction } from 'core-types'
+import type { TypeDefinitionNode } from 'graphql'
 
 
 export type NameGeneratorTestFunction = ( name: string ) => boolean;

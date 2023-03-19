@@ -1,4 +1,4 @@
-import { LocationWithLineColumn } from 'core-types'
+import type { LocationWithLineColumn } from 'core-types'
 
 
 export interface GqlLocation

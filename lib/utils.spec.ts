@@ -1,4 +1,4 @@
-import { gqlLocationsToCoreTypesLocation } from './utils'
+import { gqlLocationsToCoreTypesLocation } from './utils.js'
 
 
 describe( "utils", ( ) =>

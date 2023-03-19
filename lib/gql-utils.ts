@@ -1,11 +1,11 @@
 import {
-	TypeNode,
-	ListTypeNode,
-	NamedTypeNode,
-	NameNode,
-	NonNullTypeNode,
-	StringValueNode,
-	UnionTypeDefinitionNode,
+	type ListTypeNode,
+	type NamedTypeNode,
+	type NameNode,
+	type NonNullTypeNode,
+	type StringValueNode,
+	type TypeNode,
+	type UnionTypeDefinitionNode,
 	Kind,
 } from 'graphql'
 

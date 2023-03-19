@@ -1,4 +1,4 @@
-import { unindentEqual } from './annotation'
+import { unindentEqual } from './annotation.js'
 
 
 describe( "annotation", ( ) =>

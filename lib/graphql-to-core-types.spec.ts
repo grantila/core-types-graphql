@@ -1,4 +1,4 @@
-import { convertGraphqlToCoreTypes } from './graphql-to-core-types'
+import { convertGraphqlToCoreTypes } from './graphql-to-core-types.js'
 
 
 describe( "graphql-to-core-types", ( ) =>
